@@ -1,0 +1,6 @@
+
+# i18n/en.yaml 🇬🇧
+- id: hello
+  translation: "Halo"
+- id: how_are_you
+  translation: "Hvordan har du det"
