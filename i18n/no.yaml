@@ -1,6 +1,18 @@
 
 # i18n/en.yaml 🇬🇧
-- id: site_title
-  translation: "Capsule Demo NO"
-- id: how_are_you
-  translation: "Hvordan har du det"
+- id: "social_media_share"
+  translation: "Dele"
+- id: categories
+  translation: "Kategorier"
+- id: tags
+  translation: "Merkelapper"
+- id: tag
+  translation: "Merkelapp"
+- id: section
+  translation: "Seksjon"
+- id: prev_page
+  translation: "Forrige"
+- id: next_page
+  translation: "Neste"
+- id: search
+  translation: "Søk"

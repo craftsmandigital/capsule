@@ -1,6 +1,18 @@
 
 # i18n/en.yaml 🇬🇧
-- id: site_title
-  translation: "Capsule Demo test"
-- id: how_are_you
-  translation: "How are you doing?"
+- id: "social_media_share"
+  translation: "Share"
+- id: categories
+  translation: "Categories"
+- id: tag
+  translation: "Tag"
+- id: tags
+  translation: "Tags"
+- id: section
+  translation: "Section"
+- id: prev_page
+  translation: "Previous"
+- id: next_page
+  translation: "Next"
+- id: search
+  translation: "Search"
