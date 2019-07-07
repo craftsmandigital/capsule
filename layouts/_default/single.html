@@ -20,13 +20,16 @@
           {{ .Content }}
         </div>
 
+      </div>
+    </section>
+
+
+    <section class="section">
+      <div class="container">
         {{ partial "gitinfo.html" . }}
         {{ partial "taglist.html" . }}
-      </div>
 
-    {{/* </section> */}}
 
-    {{/* <section class="section"> */}}
     <br>
     <br>
     <br>
@@ -43,6 +46,7 @@
 
       <!-- Related list -->
       {{ partial "relatedlist.html" . }}
+      </div>
     </section>
 
     {{ partial "footer.html" . }}
