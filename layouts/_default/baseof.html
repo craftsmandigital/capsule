@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en-us" dir="ltr" itemscope itemtype="http://schema.org/Article">
+  {{ block "head" . }}
+    {{ partial "head.html" . }}
+  {{ end }}
+
+  <body style="min-height:100vh;display:flex;flex-direction:column">
+
+  {{ block "top" . }}
+      {{ partial "navbar.html" . }}
+  {{ end }}
+
+    <section class="section" style="flex:1">
+
+      <!-- Content -->
+      <div class="container">
+      
+        {{ block "pre-main" . }}
+        {{ end }}
+    
+        {{ block "main" . }}
+        {{ end }}
+
+        {{ block "post-main" . }}
+        {{ end }}
+
+      </div>
+
+    </section>
+
+    {{ block "bottom" . }}
+    {{ end }}
+
+    {{ block "footer" . }}
+      {{ partial "footer.html" . }}
+    {{ end }}
+  </body>
+
+</html>
