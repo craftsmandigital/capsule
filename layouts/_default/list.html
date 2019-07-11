@@ -5,6 +5,11 @@
     {{- else }}
       <p class="title">{{ .Kind | title }}: {{ .Title }}</p>
     {{- end }}
+    {{ with .Content }}
+      <div class="content">
+        {{ . }}
+      </div>
+    {{ end }}
 {{ end }}
 
 {{ define "main" }}   
