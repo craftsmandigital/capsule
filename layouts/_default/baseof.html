@@ -15,15 +15,28 @@
       <!-- Content -->
       <div class="container">
       
-        {{ block "pre-main" . }}
-        {{ end }}
-    
-        {{ block "main" . }}
-        {{ end }}
+        <div style="min-height:56vh">
+        
+          
+            <p class="title">Singular: {{ .Data.Singular }}</p>
+            <p class="title">Kind: {{ .Kind }}</p>
+          {{- if .Data.Singular }}
+            <p class="title">{{ .Data.Singular | title }}: {{ .Title }}</p>
+          {{- else }}
+            <p class="title">{{ .Kind | title }}: {{ .Title }}</p>
+          {{- end }}
+          
 
-        {{ block "post-main" . }}
-        {{ end }}
+          {{ block "pre-main" . }}
+          {{ end }}
+      
+          {{ block "main" . }}
+          {{ end }}
+  
+          {{ block "post-main" . }}
+          {{ end }}
 
+        </div>
       </div>
 
     </section>

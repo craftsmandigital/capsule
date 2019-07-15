@@ -1,0 +1,16 @@
+{{ with .Content }}
+  <div class="content">
+    {{ . }}
+  </div>
+{{ end }}
+
+{{- range .Paginator.Pages }}
+  {{ .Render "summary" }}
+{{- end }}
+
+<br>
+<br>
+<br>
+
+<!-- Pagination -->
+{{ partial "pagination-list.html" . }}

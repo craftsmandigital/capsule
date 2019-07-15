@@ -1,5 +1,4 @@
 {{ define "main" }}   
-  <p class="title">{{ .Title }}</p>
    
   <p class="subtitle">{{ .Date.Format "Jan 2, 2006" }}</p>
 
@@ -7,33 +6,18 @@
   <div class="content">
     {{ .Content }}
   </div>
-{{ end }}
 
-
-{{ define "bottom" }}
-
-  <section class="section">
-    <div class="container">
-      
-      {{ partial "gitinfo.html" . }}
-      {{ partial "taglist.html" . }}
-      <br>
-      <br>
-      <br>
-
-      <!-- Pagination -->
-      {{ partial "pagination-single-all.html" . }}
-
-      <br>
-
-      <!-- Page sharing links -->
-      {{ partial "share.html" . }}
-
-      <br>
-
-      <!-- Related list -->
-      {{ partial "relatedlist.html" . }}
-    </div>
-  </section>
-
+  {{ partial "gitinfo.html" . }}
+  {{ partial "taglist.html" . }}
+  <br>
+  <br>
+  <br>
+  <!-- Pagination -->
+  {{ partial "pagination-single-all.html" . }}
+  <br>
+  <!-- Page sharing links -->
+  {{ partial "share.html" . }}
+  <br>
+  <!-- Related list -->
+  {{ partial "relatedlist.html" . }}
 {{ end }}
