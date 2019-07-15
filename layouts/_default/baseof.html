@@ -17,14 +17,25 @@
       
         <div style="min-height:56vh">
         
-          
-            <p class="title">Singular: {{ .Data.Singular }}</p>
-            <p class="title">Kind: {{ .Kind }}</p>
-          {{- if .Data.Singular }}
+          {{ $title := .Title }}
+          {{ with .Kind }}
+            {{ if eq . "home"}}
+              {{ $title = "" }}
+            {{ else }}
+              {{ with $.Data.Singular }}
+                {{ $title = printf "%s: %s" ( . | title) $title}}
+              {{ end }}
+            {{ end }}  
+          {{ end }}
+          {{ with $title }}
+            <p class="title">{{ . }}</p>
+          {{ end }}
+
+          {{/* {{- if .Data.Singular }}
             <p class="title">{{ .Data.Singular | title }}: {{ .Title }}</p>
           {{- else }}
             <p class="title">{{ .Kind | title }}: {{ .Title }}</p>
-          {{- end }}
+          {{- end }} */}}
           
 
           {{ block "pre-main" . }}
