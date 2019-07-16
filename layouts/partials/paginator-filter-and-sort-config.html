@@ -1,0 +1,33 @@
+
+        {{/* {{ range (.Paginate (where .Pages "Params.featured" "=" true)).Pages -}} */}}
+
+{{/* {{ range (.Pages.ByParam "author.last_name") }} */}}
+
+{{/* {{ $pages := where site.RegularPages "Type" "in" site.Params.mainSections }} */}}
+
+
+{{/* {{ $x := .Pages.ByParam "filter.variable" }} */}}
+{{/* {{ $x := .Params.filter.variable }}
+{{/* {{ $x := .Params.filter.variable }}
+{{ $y := .Params.filter.operator }}
+{{ $z := .Params.filter.value }}
+   {{ $x := printf "%s %s %t" $x $y $z}} 
+<p class="title">XXXX output of variable: {{ $x }}</p>
+
+ */}}
+
+
+{{/* help on filtering
+https://code.luasoftware.com/tutorials/hugo/pagination-in-hugo/
+
+help on sorting
+https://discourse.gohugo.io/t/sorting-paginated-pages-by-date/14472/5 */}}
+
+{{ $x := .Param "filter.variable" }}
+{{ $y := .Param "filter.operator" }}
+{{ $z := .Param "filter.value" }}
+   {{ $q := printf "%s %s %t" $x $y $z}} 
+<p class="title">XXXX output of variable: {{ $q }}</p>
+{{ if isset .Params "filter" }} 
+{{ $paginator := .Paginate (where .Pages ( printf "Params.%s" $x ) $y $z) }}
+{{ end }}
