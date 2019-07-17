@@ -1,43 +1,50 @@
 
-        {{/* {{ range (.Paginate (where .Pages "Params.featured" "=" true)).Pages -}} */}}
 
-{{/* {{ range (.Pages.ByParam "author.last_name") }} */}}
-
-{{/* {{ $pages := where site.RegularPages "Type" "in" site.Params.mainSections }} */}}
-
-
-{{/* {{ $x := .Pages.ByParam "filter.variable" }} */}}
-{{/* {{ $x := .Params.filter.variable }}
-{{/* {{ $x := .Params.filter.variable }}
-{{ $y := .Params.filter.operator }}
-{{ $z := .Params.filter.value }}
-   {{ $x := printf "%s %s %t" $x $y $z}} 
-<p class="title">XXXX output of variable: {{ $x }}</p>
-
- */}}
-
-
-{{/* help on filtering
+{{/* 
+help on filtering
 https://code.luasoftware.com/tutorials/hugo/pagination-in-hugo/
 
 help on sorting
-https://discourse.gohugo.io/t/sorting-paginated-pages-by-date/14472/5 */}}
+https://discourse.gohugo.io/t/sorting-paginated-pages-by-date/14472/5 
+*/}}
+
 {{ if isset .Params "filter" }} 
   {{ $variable := .Param "filter.variable" }}
   {{ $operator := .Param "filter.operator" }}
   {{ $value := .Param "filter.value" }}
      {{ $q := printf "%s %s %t" $variable $operator $value}} 
   <p class="title">XXXX output of variable: {{ $q }}</p>
-  
-  {{/* {{ $paginator := .Paginate (where .Pages ( printf "Params.%s" $variable ) $operator $value) }} */}}
-  {{ $pages := where .Pages ( printf "Params.%s" $variable ) $operator $value }}
 
-  {{ $sorted := $pages.ByParam "date" }}
 
-  {{/* {{ $sorted := sort $pages "Params.date" "asc" }} */}}
+  {{/*   
 
-  {{ $paginator := .Paginate $sorted }} 
-  
+    NB! NB! READ THIS Paginator bug. downgraded from hugo 0.55.6 to 0.54
+    https://github.com/gohugoio/hugo/issues/6023 
 
-{{/* {{ range sort $paginator.Pages "Params.start" "asc" }} */}}
+
+    Bug should be fixed in version 0.56
+
+
+
+    I also had to change this in theme.toml
+    from: min_version = 0.55
+    to:   min_version = 0.54
+
+  */}}
+
+
+  {{ $pages_filtered := where .Pages ( printf "Params.%s" $variable ) $operator $value }}
+
+  {{ $pages_filtered_sorted := (sort $pages_filtered "Params.date" "desc")}}
+
+  {{ $paginator := .Paginate $pages_filtered_sorted }} 
+
+  {{/* 
+  {{ $sorted2 := (.Pages.ByParam "title").Reverse }}
+  <p>XXXX output of variable: {{ range $pages_filtered_sorted }} {{ . }} <br>{{ end }} </p>
+  <p>XXXX output of variable: {{ range $sorted2 }} {{ . }} <br>{{ end }} </p>
+  <p>XXXX output of variable: {{ $pages_filtered_sorted }}<br></p>
+  <p>XXXX output of variable: {{ $sorted2}}<br></p>
+  */}}
+
 {{ end }}
