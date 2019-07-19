@@ -59,8 +59,8 @@ https://discourse.gohugo.io/t/sorting-paginated-pages-by-date/14472/5
     {{ $operator := ( index . "operator" ) }}
     {{ $value := ( index . "value" ) }}
 
-    {{ $q := printf "%s %s %t" $variable $operator $value}} 
-    <p class="title">XXXXYYYY output of variable: {{ $q }}</p>
+    {{/* {{ $q := printf "%s %s %t" $variable $operator $value}} 
+    <p class="title">XXXXYYYY output of variable: {{ $q }}</p> */}}
   
      {{/* {{ $pages_filtered := where $.Pages ( printf "Params.%s" $variable ) $operator $value }} */}}
      {{ $pages_filtered_sorted = where $.Pages ( printf "Params.%s" $variable ) $operator $value }}
@@ -72,8 +72,8 @@ https://discourse.gohugo.io/t/sorting-paginated-pages-by-date/14472/5
      {{ with ( index . "order" ) }}
        {{ $order = . }}
      {{ end }}
-    {{ $q := printf "%s %s" $variable $order}} 
-    <p class="title">XXXXYYYY output of sort order: {{ $q }}</p>
+    {{/* {{ $q := printf "%s %s" $variable $order}} 
+    <p class="title">XXXXYYYY output of sort order: {{ $q }}</p> */}}
     {{/*   
   
       NB! NB! READ THIS Paginator bug on sort function. downgraded from hugo 0.55.6 to 0.54
