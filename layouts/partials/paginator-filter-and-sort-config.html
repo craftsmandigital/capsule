@@ -8,43 +8,35 @@ help on sorting
 https://discourse.gohugo.io/t/sorting-paginated-pages-by-date/14472/5 
 */}}
 
-{{ if isset .Params "filter" }} 
-  {{ $variable := .Param "filter.variable" }}
-  {{ $operator := .Param "filter.operator" }}
-  {{ $value := .Param "filter.value" }}
-     {{ $q := printf "%s %s %t" $variable $operator $value}} 
-  <p class="title">XXXX output of variable: {{ $q }}</p>
+{{ $frontMatterVarString := "config" }}
+{{ $frontMatterSubVarString := "filter" }}
 
-
-  {{/*   
-
-    NB! NB! READ THIS Paginator bug. downgraded from hugo 0.55.6 to 0.54
-    https://github.com/gohugoio/hugo/issues/6023 
-
-
-    Bug should be fixed in version 0.56
-
-
-
-    I also had to change this in theme.toml
-    from: min_version = 0.55
-    to:   min_version = 0.54
-
-  */}}
-
-
-  {{ $pages_filtered := where .Pages ( printf "Params.%s" $variable ) $operator $value }}
-
-  {{ $pages_filtered_sorted := (sort $pages_filtered "Params.date" "desc")}}
-
-  {{ $paginator := .Paginate $pages_filtered_sorted }} 
-
-  {{/* 
-  {{ $sorted2 := (.Pages.ByParam "title").Reverse }}
-  <p>XXXX output of variable: {{ range $pages_filtered_sorted }} {{ . }} <br>{{ end }} </p>
-  <p>XXXX output of variable: {{ range $sorted2 }} {{ . }} <br>{{ end }} </p>
-  <p>XXXX output of variable: {{ $pages_filtered_sorted }}<br></p>
-  <p>XXXX output of variable: {{ $sorted2}}<br></p>
-  */}}
-
+{{ with (index .Params $frontMatterVarString ) }}
+  {{ with (index . $frontMatterSubVarString)  }}
+    
+    {{ $variable := ( index . "variable" ) }}
+    {{ $operator := ( index . "operator" ) }}
+    {{ $value := ( index . "value" ) }}
+    {{ $q := printf "%s %s %t" $variable $operator $value}} 
+    <p class="title">XXXXYYYY output of variable: {{ $q }}</p>
+    {{/*   
+  
+      NB! NB! READ THIS Paginator bug on sort function. downgraded from hugo 0.55.6 to 0.54
+      https://github.com/gohugoio/hugo/issues/6023 
+  
+      Bug should be fixed in version 0.56
+  
+      I also had to change this in theme.toml
+      from: min_version = 0.55
+      to:   min_version = 0.54
+  
+    */}}
+  
+  
+    {{ $pages_filtered := where $.Pages ( printf "Params.%s" $variable ) $operator $value }}
+  
+    {{ $pages_filtered_sorted := (sort $pages_filtered "Params.date" "desc")}}
+  
+    {{ $paginator := $.Paginate $pages_filtered_sorted }} 
+    {{ end }} 
 {{ end }}
