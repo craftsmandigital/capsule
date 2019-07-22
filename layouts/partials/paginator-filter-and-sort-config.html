@@ -86,7 +86,12 @@ https://discourse.gohugo.io/t/sorting-paginated-pages-by-date/14472/5
       to:   min_version = 0.54
   
     */}}
-    {{ $pages_filtered_sorted = (sort $pages_filtered_sorted ( printf "Params.%s" $variable ) $order)}}
+    {{/* {{ $pages_filtered_sorted = (sort $pages_filtered_sorted ( printf "Params.%s" $variable ) $order)}} */}}
+    {{ if eq $order "asc" }}
+      {{ $pages_filtered_sorted = ($pages_filtered_sorted.ByParam $variable )}}
+    {{ else }}
+      {{ $pages_filtered_sorted = ($pages_filtered_sorted.ByParam $variable ).Reverse  }} 
+    {{ end }}
   
    {{ end }}
    {{ $paginator := $.Paginate $pages_filtered_sorted }} 
