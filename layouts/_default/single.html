@@ -1,11 +1,6 @@
 {{ define "main" }}   
    
   <p class="subtitle">{{ .Date.Format "Jan 2, 2006" }}</p>
-
-    {{/* {{ $q := printf "%s %s %t" $variable $operator $value}}  */}}
-    {{/* <p class="title">XXXXYYYY output of variable: {{ range .CurrentSection.Paginator.Pages }} {{ . }}   <br> {{ end }}</p> */}}
-    {{/* {{ $pager := .CurrentSection.Paginator.Prev.URL}}
-    <p class="title">XXXXYYYY output of variable: {{ $pager }} </p> */}}
   {{ partial "toc.html" . }}
   <div class="content">
     {{ .Content }}
