@@ -1,0 +1,58 @@
+
+
+{{/* {{ $paginator := $.Paginate ( partial "page-filter-and-sort-config.html" . )}}  */}}
+    {{/* {{ $q := printf "%s %s %t" $variable $operator $value}}  */}}
+
+
+{{/* 
+    {{ with .CurrentSection }}
+    {{ $pages := ( partial "page-filter-and-sort-config.html" . ) }}
+      <p class="title">Title: {{ len $pages}} </p>
+    {{ range $i, $page := $pages}} 
+      <p>Prev: {{ with $page.Prev }} {{ .Title }} {{ end }}</p>
+      <p class="title">Title: {{ .Title }} {{ $i }}</p>
+      <p>Next: {{ with $page.Next }} {{ .Title }} {{ end }}</p>
+    {{ end }}
+    {{ end }}
+     */}}
+    
+    {{/* {{ $pager := .CurrentSection.Paginator.Prev.URL}}
+    <p class="title">XXXXYYYY output of variable: {{ $pager }} </p> */}}
+
+
+{{ $current := . }}
+{{ $next := false }}
+{{ $prev := false }}
+{{ $found := false }}
+{{ $break := false }}
+
+{{ with .CurrentSection }}
+
+    {{ $pages := ( partial "page-filter-and-sort-config.html" . ) }}
+  {{ range $pages }}
+      
+  {{ if not $break }}
+    {{ if $found }}
+      {{ $next = .}}
+      {{ $break = true }}  
+    {{ else }}
+      {{ $found = (eq $current .) }}
+      {{ if not $found }}
+        {{ $prev = .}}
+      {{ end }}
+    {{ end }}
+  {{ end }}
+{{ end }}
+
+{{ with $prev }}
+      <p class="title">Previous page: {{ .Title }} </p>
+{{ end }}
+
+      <p class="title">This page: {{ $current.Title }} </p>
+
+{{ with $next }}
+      <p class="title">Next page: {{ .Title }} </p>
+{{ end }}
+
+
+{{ end }}

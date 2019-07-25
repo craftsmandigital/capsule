@@ -1,0 +1,99 @@
+
+{{/* 
+
+This is a partial to prepare the pagination object to
+filter and sort based on variables set in _index.md files.
+List template wil sort and filter based on variables set.
+
+The variable that handeles sorting and filtering is "config"
+Look at "config" in sample below.
+
+Here is a _index.md front matter example, yaml file
+---
+title: "DataRekrutt"
+date: 2019-02-01T09:09:15+01:00
+draft: false
+type: "static"
+config:
+  filter:
+    variable: "featured"
+    operator: "="
+    value: true
+  sort:
+    variable: "date"
+    order: "desc"
+--- 
+
+Here is the front matter(yaml) of a md content file that wil
+be affected of the filter and sort parameters above
+
+---
+title: Gogle foto introduksjon
+date: 2019-01-29 11:49:03 +0000
+SectionPagesMenu: main
+weight: 30
+featured: true
+categories:
+ - opplæring
+---
+
+*/}}
+
+{{/* 
+help on filtering
+https://code.luasoftware.com/tutorials/hugo/pagination-in-hugo/
+
+help on sorting
+https://discourse.gohugo.io/t/sorting-paginated-pages-by-date/14472/5 
+*/}}
+{{ $pages_filtered_sorted := .Pages}}
+
+{{ $frontMatterVarString := "config" }}
+{{ $frontMatterSubVarString := "filter" }}
+{{ $frontMatterSubVarString2 := "sort" }}
+
+{{ with (index .Params $frontMatterVarString ) }}
+
+  {{ with (index . $frontMatterSubVarString)  }}
+    {{ $variable := ( index . "variable" ) }}
+    {{ $operator := ( index . "operator" ) }}
+    {{ $value := ( index . "value" ) }}
+
+    {{/* {{ $q := printf "%s %s %t" $variable $operator $value}} 
+    <p class="title">XXXXYYYY output of variable: {{ $q }}</p> */}}
+  
+     {{/* {{ $pages_filtered := where $.Pages ( printf "Params.%s" $variable ) $operator $value }} */}}
+     {{ $pages_filtered_sorted = where $.Pages ( printf "Params.%s" $variable ) $operator $value }}
+  
+   {{ end }} 
+   {{ with (index . $frontMatterSubVarString2)  }}
+     {{ $order := "asc" }}
+     {{ $variable := ( index . "variable" ) }}
+     {{ with ( index . "order" ) }}
+       {{ $order = . }}
+     {{ end }}
+    {{/* {{ $q := printf "%s %s" $variable $order}} 
+    <p class="title">XXXXYYYY output of sort order: {{ $q }}</p> */}}
+    {{/*   
+  
+      NB! NB! READ THIS Paginator bug on sort function. downgraded from hugo 0.55.6 to 0.54
+      https://github.com/gohugoio/hugo/issues/6023 
+  
+      Bug should be fixed in version 0.56
+  
+      I also had to change this in theme.toml
+      from: min_version = 0.55
+      to:   min_version = 0.54
+  
+    */}}
+    {{/* {{ $pages_filtered_sorted = (sort $pages_filtered_sorted ( printf "Params.%s" $variable ) $order)}} */}}
+    {{ if eq $order "asc" }}
+      {{ $pages_filtered_sorted = ($pages_filtered_sorted.ByParam $variable )}}
+    {{ else }}
+      {{ $pages_filtered_sorted = ($pages_filtered_sorted.ByParam $variable ).Reverse  }} 
+    {{ end }}
+  
+   {{ end }}
+{{ end }}
+{{/* <p class="title">XXXXYYYY output of variable: {{ range $pages_filtered_sorted }} {{ . }}   <br> {{ end }}</p> */}}
+{{ return $pages_filtered_sorted }} 
