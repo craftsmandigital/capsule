@@ -1,5 +1,4 @@
 
-<div class="container">
 
 
 
@@ -7,80 +6,59 @@
 
 {{ with $direction }}
   
-{{ with .prev }}
-      <p class="title">Previous page: {{ .Title }} </p>
-{{ end }}
-
-      <p class="title">This page: {{ $.Title }} </p>
-
-{{ with .next }}
-      <p class="title">Next page: {{ .Title }} </p>
-{{ end }}
-
-{{ end }}
-
-
-  <div class="level">
-
-    <div class="level-left">
-      <div class="level-item">
-        <p class="control has-addons">
-          {{- if .NextPage }}
-          <a class="button" href="{{ .NextPage.Permalink }}">
-            <span class="icon is-small"><i class="fa fa-chevron-left"></i></span>
-            <span class="is-hidden-touch is-hidden-desktop-only">
-              {{ .NextPage.Title | truncate 100 "..." }}
-            </span>
-            <span class="is-hidden-touch is-hidden-widescreen">
-              {{ .NextPage.Title | truncate 75 "..." }}
-            </span>
-            <span class="is-hidden-mobile is-hidden-desktop">
-              {{ .NextPage.Title | truncate 50 "..." }}
-            </span>
-            <span class="is-hidden-tablet">
-              {{ .NextPage.Title | truncate 40 "..." }}
-            </span>
-            <!-- <span>&nbsp;| {{ title .NextPage.Section | pluralize }}</span> -->
-          </a>
-          {{- else }}
-          <a class="button" href="#" disabled>
-            <span class="icon is-small"><i class="fa fa-chevron-left"></i></span>
-            <span>Newest</span>
-          </a>
-          {{- end }}
-        </p>
+  <div class="container">
+  
+    <div class="level">
+  
+      <div class="level-left">
+        <div class="level-item">
+          <p class="control has-addons">
+            {{- with .prev }}
+            <a class="button" href="{{ .Permalink }}">
+              <span class="icon is-small"><i class="fa fa-chevron-left"></i></span>
+              <span class="is-hidden-touch is-hidden-desktop-only">
+                {{ .Title | truncate 100 "..." }}
+              </span>
+              <span class="is-hidden-touch is-hidden-widescreen">
+                {{ .Title | truncate 75 "..." }}
+              </span>
+              <span class="is-hidden-mobile is-hidden-desktop">
+                {{ .Title | truncate 50 "..." }}
+              </span>
+              <span class="is-hidden-tablet">
+                {{ .Title | truncate 40 "..." }}
+              </span>
+            </a>
+            {{- end }}
+          </p>
+        </div>
       </div>
-    </div>
-
-    <div class="level-right">
-      <div class="level-item">
-        <p class="control has-addons">
-          {{- if .PrevPage }}
-          <a class="button" href="{{ .PrevPage.Permalink }}">
-            <span class="is-hidden-touch is-hidden-desktop-only">
-              {{ .PrevPage.Title | truncate 100 "..." }}
-            </span>
-            <span class="is-hidden-touch is-hidden-widescreen">
-              {{ .PrevPage.Title | truncate 75 "..." }}
-            </span>
-            <span class="is-hidden-mobile is-hidden-desktop">
-              {{ .PrevPage.Title | truncate 50 "..." }}
-            </span>
-            <span class="is-hidden-tablet">
-              {{ .PrevPage.Title | truncate 40 "..." }}
-            </span>
-            <!-- <span>&nbsp;| {{ title .PrevPage.Section | pluralize }}</span> -->
-            <span class="icon is-small"><i class="fa fa-chevron-right"></i></span>
-          </a>
-          {{- else }}
-          <a class="button" href="#" disabled>
-            <span>Oldest</span>
-            <span class="icon is-small"><i class="fa fa-chevron-right"></i></span>
-          </a>
-          {{- end }}
-        </p>
+  
+      <div class="level-right">
+        <div class="level-item">
+          <p class="control has-addons">
+            {{- with .next }}
+            <a class="button" href="{{ .Permalink }}">
+              <span class="is-hidden-touch is-hidden-desktop-only">
+                {{ .Title | truncate 100 "..." }}
+              </span>
+              <span class="is-hidden-touch is-hidden-widescreen">
+                {{ .Title | truncate 75 "..." }}
+              </span>
+              <span class="is-hidden-mobile is-hidden-desktop">
+                {{ .Title | truncate 50 "..." }}
+              </span>
+              <span class="is-hidden-tablet">
+                {{ .Title | truncate 40 "..." }}
+              </span>
+              <span class="icon is-small"><i class="fa fa-chevron-right"></i></span>
+            </a>
+            {{- end }}
+          </p>
+        </div>
       </div>
+  
     </div>
-
   </div>
-</div>
+  
+{{ end }}
