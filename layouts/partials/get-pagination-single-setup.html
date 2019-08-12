@@ -54,5 +54,6 @@
       <p class="title">Next page: {{ .Title }} </p>
 {{ end }}
 
+{{ return (dict "prev" $prev "next" $next  ) }}
 
 {{ end }}

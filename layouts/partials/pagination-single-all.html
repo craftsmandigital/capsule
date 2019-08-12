@@ -3,10 +3,21 @@
 
 
 
-  {{ partial "get-pagination-single-setup.html" . }}
+{{ $direction := partial "get-pagination-single-setup.html" . }}
 
+{{ with $direction }}
+  
+{{ with .prev }}
+      <p class="title">Previous page: {{ .Title }} </p>
+{{ end }}
 
+      <p class="title">This page: {{ $.Title }} </p>
 
+{{ with .next }}
+      <p class="title">Next page: {{ .Title }} </p>
+{{ end }}
+
+{{ end }}
 
 
   <div class="level">
