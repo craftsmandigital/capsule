@@ -23,7 +23,8 @@
               {{ $title = "" }}
             {{ else }}
               {{ with $.Data.Singular }}
-                {{ $title = printf "%s: %s" ( . | title) $title}}
+                {{/* {{ $title = printf "%s: %s" ( . | title) $title}} */}}
+                {{ $title = printf "%s: %s" ( i18n (lower .)) $title}}
               {{ end }}
             {{ end }}  
           {{ end }}

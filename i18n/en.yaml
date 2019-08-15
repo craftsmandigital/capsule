@@ -1,0 +1,22 @@
+
+# i18n/en.yaml 
+- id: "last_edited"
+  translation: "Last edited"
+- id: "related"
+  translation: "Related"
+- id: "social_media_share"
+  translation: "Share"
+- id: categories
+  translation: "Categories"
+- id: tag
+  translation: "Tag"
+- id: tags
+  translation: "Tags"
+- id: section
+  translation: "Section"
+- id: prev_page
+  translation: "Previous"
+- id: next_page
+  translation: "Next"
+- id: search
+  translation: "Search"

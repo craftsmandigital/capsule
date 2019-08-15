@@ -1,0 +1,24 @@
+
+# i18n/en.yaml
+- id: "last_edited"
+  translation: "Sist endret"
+- id: "related"
+  translation: "Relatert"
+- id: "social_media_share"
+  translation: "Dele"
+- id: category
+  translation: "Kategori"
+- id: categories
+  translation: "Kategorier"
+- id: tags
+  translation: "Merkelapper"
+- id: tag
+  translation: "Merkelapp"
+- id: section
+  translation: "Seksjon"
+- id: prev_page
+  translation: "Forrige"
+- id: next_page
+  translation: "Neste"
+- id: search
+  translation: "Søk"
