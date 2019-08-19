@@ -2,8 +2,8 @@
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
-  
-  <title>{{- .Title | default .Site.Title -}}
+  {{ $title := .Title | default .Site.Title | title }}
+  <title>{{- $title -}}
   {{ if not .IsHome }} - {{ .Site.Title -}}{{ end }}</title>
 
   <meta name="author" content="{{ .Site.Author.name }}" />
@@ -11,7 +11,7 @@
   {{- $desc := .Description -}}
   {{- if not $desc }}
     {{ with .Summary }}
-      {{ $desc = .}}      
+      {{ $desc = . | truncate 200 "..."}}      
     {{ end }}
   {{ end -}}
 
@@ -34,17 +34,13 @@
   {{ hugo.Generator }}
 
   <!-- Schema.org markup for Google+ -->
-  <meta itemprop="name" content="{{ .Title }}"/>
+  <meta itemprop="name" content="{{ $title }}"/>
   {{- if .IsPage }}
   <meta itemprop="description"
-        content="{{ with .Description }}{{ . -}}
-                 {{ else }}{{ .Content | safeHTML | truncate 200 "..." -}}
-                 {{ end }}"/>
+        content="{{ $desc }}"/>
   {{- else }}
   <meta itemprop="description"
-        content="{{ with .Description }}{{ . -}}
-                 {{ else }}{{ .Params.description -}}
-                 {{ end }}"/>
+        content="{{ $desc }}"/>
   {{- end }}
   <meta itemprop="image"
         content="{{ with .Params.image }}{{ . -}}
@@ -55,7 +51,7 @@
                  {{ end }}"/>
 
   <!-- OpenGraph data -->
-  <meta property="og:title" content="{{ .Title }}"/>
+  <meta property="og:title" content="{{ $title }}"/>
   <meta property="og:type"
         content="{{ if .IsPage }}article{{ else }}website{{ end }}"/>
   <meta property="og:url" content="{{ .Permalink }}"/>
@@ -68,14 +64,10 @@
                  {{ end }}"/>
   {{- if .IsPage }}
   <meta property="og:description"
-        content="{{ with .Description }}{{ . -}}
-                 {{ else }}{{ .Content | safeHTML | truncate 200 "..." -}}
-                 {{ end }}"/>
+        content="{{ $desc }}"/>
   {{- else }}
   <meta property="og:description"
-        content="{{ with .Description }}{{ . -}}
-                 {{ else }}{{ .Params.description -}}
-                 {{ end }}"/>
+        content="{{ $desc }}"/>
   {{- end }}
   <meta property="og:site_name" content="{{ .Site.Title }}"/>
   {{- if .GitInfo }}
@@ -110,11 +102,9 @@
   <meta name="twitter:card" content="summary"/>
   <meta name="twitter:site"
         content="{{ with .Site.Social.twitter }}@{{.}}{{ end }}"/>
-  <meta name="twitter:title" content="{{ .Title }}"/>
+  <meta name="twitter:title" content="{{ $title }}"/>
   <meta name="twitter:description"
-        content="{{ with .Description }}{{ . -}}
-                 {{ else }}{{ .Content | safeHTML | truncate 200 "..." -}}
-                 {{ end }}"/>
+        content="{{ $desc }}"/>
   <meta name="twitter:creator"
         content="{{ with .Site.Social.twitter }}@{{.}}{{ end }}"/>
   <meta name="twitter:image:src"
