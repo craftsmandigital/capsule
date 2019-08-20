@@ -4,7 +4,7 @@
 {{- $.Scratch.Set "count" 0 }}
 {{- $.Scratch.Set "max_show" 15 }}
 
-{{- range .Site.Pages.ByDate.Reverse }}
+{{- range .Site.RegularPages.ByDate.Reverse }}
   {{- $page := . }}
   {{- $.Scratch.Set "has_related" false }}
 

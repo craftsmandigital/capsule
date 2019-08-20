@@ -46,7 +46,7 @@ https://code.luasoftware.com/tutorials/hugo/pagination-in-hugo/
 help on sorting
 https://discourse.gohugo.io/t/sorting-paginated-pages-by-date/14472/5 
 */}}
-{{ $pages_filtered_sorted := .Pages}}
+{{ $pages_filtered_sorted := .RegularPages}}
 
 {{ $frontMatterVarString := "config" }}
 {{ $frontMatterSubVarString := "filter" }}
@@ -63,7 +63,7 @@ https://discourse.gohugo.io/t/sorting-paginated-pages-by-date/14472/5
     <p class="title">XXXXYYYY output of variable: {{ $q }}</p> */}}
   
      {{/* {{ $pages_filtered := where $.Pages ( printf "Params.%s" $variable ) $operator $value }} */}}
-     {{ $pages_filtered_sorted = where $.Pages ( printf "Params.%s" $variable ) $operator $value }}
+     {{ $pages_filtered_sorted = where $.RegularPages ( printf "Params.%s" $variable ) $operator $value }}
   
    {{ end }} 
    {{ with (index . $frontMatterSubVarString2)  }}
