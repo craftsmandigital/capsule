@@ -2,12 +2,14 @@
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  {{/* https://digitalonlinetactics.com/post/blogging/hugo-seo-tips/#title */}}
   {{ $title := .Title | default .Site.Title | title }}
   <title>{{- $title -}}
   {{ if not .IsHome }} - {{ .Site.Title -}}{{ end }}</title>
 
   <meta name="author" content="{{ .Site.Author.name }}" />
 
+  {{/* https://digitalonlinetactics.com/post/blogging/hugo-seo-tips/#description */}}
   {{- $desc := .Description -}}
   {{- if not $desc }}
     {{ with .Summary }}
@@ -29,7 +31,13 @@
 
   <meta name="description" content="{{ $desc }}">
 
-  {{/* <meta name="description" content="{{ .Summary }}"> */}}
+
+  {{/* https://digitalonlinetactics.com/post/blogging/hugo-seo-tips/#robots-meta-tag */}}
+  {{ if and (eq .Kind "taxonomy") (eq .Type "categories")}}
+  <meta name="robots" content="noindex, follow"/>
+  {{ else }}
+  <meta name="robots" content="index, follow"/>
+  {{ end }}  
 
   {{ hugo.Generator }}
 
@@ -115,10 +123,20 @@
                    {{ end -}}
                  {{ end }}"/>
 
+  {{/* https://digitalonlinetactics.com/post/blogging/hugo-seo-tips/#canonical  */}}
+  {{ if or (eq .Kind "home") (eq .Kind "page")}}
+    {{ if isset .Params "canonical" }}
+      <link rel="canonical" href="{{ .Params.Canonical}}" />
+    {{ else }}
+      <link rel="canonical" href="{{ .Permalink}}" />
+    {{ end }}
+  {{ end }}
+
   <!-- RSS -->
   {{- with .OutputFormats.Get "RSS" }}
     {{ printf `<link rel="%s" type="%s" href="%s" title="%s" />` .Rel .MediaType.Type .Permalink $.Site.Title | safeHTML }}
   {{- end }}
+
 
   <!-- CSS -->
   <link rel="stylesheet" type="text/css" href="/css/capsule.min.css"/>
