@@ -9,7 +9,7 @@
 
   <meta name="author" content="{{ .Site.Author.name }}" />
 
-  {{/* https://digitalonlinetactics.com/post/blogging/hugo-seo-tips/#description */}}
+  {{/* https://digitalonlinetactics.com/post/blogging/hugo-seo-tips/#descriptio  */}}
   {{- $desc := .Description -}}
   {{- if not $desc }}
     {{ with .Summary }}
@@ -140,6 +140,13 @@
 
   <!-- CSS -->
   <link rel="stylesheet" type="text/css" href="/css/capsule.min.css"/>
+
+  {{/* <link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://lib.arvancloud.com/ar/bulmaswatch/0.7.2/nuclear/bulmaswatch.min.css"> */}}
+
+  {{/* <link rel="stylesheet" href="https://lib.arvancloud.com/ar/bulmaswatch/0.7.2/solar/bulmaswatch.min.css"> */}}
+  {{/* <link rel="stylesheet" href="https://lib.arvancloud.com/ar/bulmaswatch/0.7.2/cyborg/bulmaswatch.min.css"> */}}
+  {{/* <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.7.5/css/bulma.min.css"> */}}
   {{ with .Params.css }}{{ . | safeCSS | htmlUnescape | safeHTML }}{{ end -}}
 
   <!-- JS -->
