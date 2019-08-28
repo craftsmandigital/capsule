@@ -1,13 +1,17 @@
 <footer class="footer">
   <div class="container">
     <nav class="level">
-
       {{ range $.Site.Home.Sections -}}
-      <div class="level-item has-text-centered">
-        <a href="{{ .Permalink }}" class="heading">
-          <span class="header">{{ .Title }}</span>
-        </a>
-      </div>
+        {{ if ne ( substr .Title 0 1 ) "_" }}
+        {{/* Had to do this test, because hugo since 0.57 wil not ingnore drafts
+        Section titles that starts with an underscore wil not be rendered
+        ex. _test _dummy */}}
+          <div class="level-item has-text-centered">
+            <a href="{{ .Permalink }}" class="heading">
+              <span class="header">{{ .Title }}</span>
+            </a>
+          </div>
+        {{ end }}
       {{- end }}
 
     </nav>
