@@ -22,6 +22,6 @@
   </div>
   {{- end }}
   <div class="message-body">
-    {{ .Inner }}
+    {{ .Inner | markdownify }}
   </div>
 </div>
